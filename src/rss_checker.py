@@ -51,7 +51,8 @@ def _fetch_and_parse(url: str):
 
     Some feeds (e.g. Medium/TDS) return 403 status but still include valid
     XML in the response body, so we check the body content regardless of
-    status code.
+    status code.  If the response is a non-XML error page (e.g. Cloudflare
+    challenge), we skip the useless feedparser fallback.
     """
     try:
         resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
@@ -70,8 +71,16 @@ def _fetch_and_parse(url: str):
                 resp.status_code,
                 url,
             )
+            if not is_xml:
+                return feedparser.FeedParserDict(
+                    bozo=True,
+                    bozo_exception=Exception(
+                        f"HTTP {resp.status_code} with non-XML body (likely Cloudflare)"
+                    ),
+                    entries=[],
+                )
     except requests.RequestException as exc:
-        logger.warning("Request failed for %s: %s", url, exc)
+        logger.warning("Request failed for %s: %s — falling back to feedparser", url, exc)
 
     return feedparser.parse(url)
 
