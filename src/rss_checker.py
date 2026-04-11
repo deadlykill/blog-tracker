@@ -1,5 +1,4 @@
 import logging
-import re
 from datetime import datetime
 
 import feedparser
@@ -13,17 +12,10 @@ HEADERS = {
         "AppleWebKit/537.36 (KHTML, like Gecko) "
         "Chrome/125.0.0.0 Safari/537.36"
     ),
+    "Accept": "application/rss+xml, application/xml, text/xml, */*",
 }
 
-_INVALID_XML_RE = re.compile(
-    r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f"
-    r"\ud800-\udfff\ufffe\uffff]"
-)
-
-
-def _sanitize_xml(text: str) -> str:
-    """Strip characters that are illegal in XML 1.0."""
-    return _INVALID_XML_RE.sub("", text)
+REQUEST_TIMEOUT = 30
 
 
 def check_rss_feed(site: dict) -> list[dict]:
@@ -55,15 +47,33 @@ def check_rss_feed(site: dict) -> list[dict]:
 
 
 def _fetch_and_parse(url: str):
-    """Download feed content, sanitize invalid XML chars, then parse."""
+    """Fetch feed with browser headers, then parse with feedparser.
+
+    Some feeds (e.g. Medium/TDS) return 403 status but still include valid
+    XML in the response body, so we check the body content regardless of
+    status code.
+    """
     try:
-        resp = requests.get(url, headers=HEADERS, timeout=30)
-        resp.raise_for_status()
-        clean = _sanitize_xml(resp.text)
-        return feedparser.parse(clean)
+        resp = requests.get(url, headers=HEADERS, timeout=REQUEST_TIMEOUT)
+
+        body = resp.text.strip()
+        is_xml = body.startswith(("<?xml", "<rss", "<feed", "<atom"))
+
+        if resp.status_code == 200 or is_xml:
+            feed = feedparser.parse(resp.text)
+            if feed.entries:
+                return feed
+
+        if resp.status_code != 200:
+            logger.warning(
+                "HTTP %d fetching %s — site may block datacenter IPs",
+                resp.status_code,
+                url,
+            )
     except requests.RequestException as exc:
-        logger.warning("HTTP error fetching feed %s: %s", url, exc)
-        return feedparser.parse(url)
+        logger.warning("Request failed for %s: %s", url, exc)
+
+    return feedparser.parse(url)
 
 
 def _extract_date(entry) -> str:
