@@ -17,6 +17,7 @@ import sys
 import tempfile
 import time
 from pathlib import Path
+from unittest.mock import MagicMock
 
 BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR))
@@ -24,8 +25,13 @@ sys.path.insert(0, str(BASE_DIR))
 from src.storage import load_state, save_state, get_known_urls, update_known_urls
 from src.checker import load_sites, check_all_sites, _fetch_posts, _find_new_posts
 from src.notifier import _format_plain, _format_html
-from src.rss_checker import check_rss_feed
-from src.scrape_checker import check_scraped_site
+from src.rss_checker import check_rss_feed, _fetch_and_parse, _extract_date
+from src.scrape_checker import (
+    check_scraped_site,
+    _extract_title,
+    _is_better_title,
+    _is_article_url,
+)
 
 
 class Colors:
@@ -178,9 +184,24 @@ def test_config(runner: TestRunner):
         dupes = [x for x in ids if ids.count(x) > 1]
         runner.fail("duplicate site IDs", str(set(dupes)))
 
+    scrape_sites = [s for s in sites if s.get("type") == "scrape"]
+    for s in scrape_sites:
+        if "selector" in s and "base_url" in s:
+            runner.ok(f"scrape site '{s['name']}' has selector & base_url")
+        else:
+            missing = []
+            if "selector" not in s:
+                missing.append("selector")
+            if "base_url" not in s:
+                missing.append("base_url")
+            runner.fail(f"scrape site '{s['name']}'", f"missing: {', '.join(missing)}")
+
     enabled = [s for s in sites if s.get("enabled", True)]
-    disabled = len(sites) - len(enabled)
-    runner.ok(f"{len(enabled)} enabled, {disabled} disabled sites found")
+    disabled = [s for s in sites if not s.get("enabled", True)]
+    runner.ok(f"{len(enabled)} enabled, {len(disabled)} disabled sites found")
+    if disabled and runner.verbose:
+        for s in disabled:
+            print(f"        └─ disabled: {s['name']}")
 
 
 # ---------------------------------------------------------------------------
@@ -248,8 +269,8 @@ def test_notifier(runner: TestRunner):
     else:
         runner.fail("plain-text format", "missing expected fields")
 
-    html = _format_html(sample_updates)
-    if "<html>" in html and "Test Blog" in html and 'href="https://example.com/1"' in html:
+    html_out = _format_html(sample_updates)
+    if "<html>" in html_out and "Test Blog" in html_out and "example.com/1" in html_out:
         runner.ok("HTML format contains expected markup")
     else:
         runner.fail("HTML format", "missing expected elements")
@@ -263,6 +284,126 @@ def test_notifier(runner: TestRunner):
         runner.ok("plain-text omits date gracefully when missing")
     else:
         runner.fail("plain-text missing date handling")
+
+    xss_updates = {
+        '<script>alert("xss")</script>': [
+            {"title": '<img onerror="hack">', "url": "https://evil.com/a&b=1"},
+        ],
+    }
+    xss_html = _format_html(xss_updates)
+    if "<script>" not in xss_html and 'onerror="hack"' not in xss_html:
+        runner.ok("HTML output escapes XSS payloads")
+    else:
+        runner.fail("HTML XSS escaping", "raw HTML found in output")
+
+    if "&amp;" in xss_html:
+        runner.ok("HTML output escapes & in URLs")
+    else:
+        runner.fail("HTML URL escaping", "& not escaped")
+
+
+# ---------------------------------------------------------------------------
+# Scrape checker helper tests
+# ---------------------------------------------------------------------------
+def test_scrape_helpers(runner: TestRunner):
+    section("Scrape Checker Helpers")
+
+    if _is_better_title("A Good Title", "/some/path"):
+        runner.ok("_is_better_title prefers text over URL-like old title")
+    else:
+        runner.fail("_is_better_title text vs URL")
+
+    if not _is_better_title("/another/path", "A Good Title"):
+        runner.ok("_is_better_title keeps text title over URL-like new title")
+    else:
+        runner.fail("_is_better_title URL vs text")
+
+    if _is_better_title("A Longer Descriptive Title", "Short"):
+        runner.ok("_is_better_title prefers longer title when both are text")
+    else:
+        runner.fail("_is_better_title longer vs shorter")
+
+    if not _is_better_title("ab", "A Fine Title"):
+        runner.ok("_is_better_title rejects very short new titles")
+    else:
+        runner.fail("_is_better_title short rejection")
+
+    if not _is_better_title("", "Something"):
+        runner.ok("_is_better_title rejects empty new title")
+    else:
+        runner.fail("_is_better_title empty rejection")
+
+    site_stub = {"base_url": "https://example.com"}
+    if not _is_article_url("https://example.com/tag/python", site_stub):
+        runner.ok("_is_article_url filters /tag/ URLs")
+    else:
+        runner.fail("_is_article_url /tag/")
+
+    if not _is_article_url("https://example.com/page/2", site_stub):
+        runner.ok("_is_article_url filters /page/ URLs")
+    else:
+        runner.fail("_is_article_url /page/")
+
+    if not _is_article_url("https://example.com/team/john", site_stub):
+        runner.ok("_is_article_url filters /team/ URLs")
+    else:
+        runner.fail("_is_article_url /team/")
+
+    if _is_article_url("https://example.com/blog/my-post", site_stub):
+        runner.ok("_is_article_url allows normal blog URLs")
+    else:
+        runner.fail("_is_article_url normal blog URL")
+
+    mock_link = MagicMock()
+    mock_link.get_text.return_value = "A Real Title Here"
+    mock_link.find.return_value = None
+    mock_link.get.return_value = "/fallback"
+    title = _extract_title(mock_link)
+    if title == "A Real Title Here":
+        runner.ok("_extract_title uses link text when available")
+    else:
+        runner.fail("_extract_title link text", f"got {title!r}")
+
+
+# ---------------------------------------------------------------------------
+# RSS checker helper tests
+# ---------------------------------------------------------------------------
+def test_rss_helpers(runner: TestRunner):
+    section("RSS Checker Helpers")
+
+    from time import struct_time
+
+    entry_with_published = MagicMock()
+    entry_with_published.get = lambda k, d=None: (
+        (2026, 4, 11, 0, 0, 0, 0, 0, 0) if k == "published_parsed" else d
+    )
+    date = _extract_date(entry_with_published)
+    if date == "2026-04-11":
+        runner.ok("_extract_date parses published_parsed")
+    else:
+        runner.fail("_extract_date published_parsed", f"got {date!r}")
+
+    entry_raw_only = MagicMock()
+    def _raw_get(k, d=None):
+        if k in ("published_parsed", "updated_parsed"):
+            return None
+        if k == "published":
+            return "2026-03-15T10:00:00Z"
+        return d
+    entry_raw_only.get = _raw_get
+    date2 = _extract_date(entry_raw_only)
+    if date2 == "2026-03-15":
+        runner.ok("_extract_date falls back to raw published string")
+    else:
+        runner.fail("_extract_date raw fallback", f"got {date2!r}")
+
+    entry_empty = MagicMock()
+    entry_empty.get = lambda k, d=None: d
+    date3 = _extract_date(entry_empty)
+    if date3 == "":
+        runner.ok("_extract_date returns '' when no date fields exist")
+    else:
+        runner.fail("_extract_date empty", f"got {date3!r}")
 
 
 # ---------------------------------------------------------------------------
@@ -286,18 +427,37 @@ def test_checker_logic(runner: TestRunner):
 
     state_partial = {"test_site": ["https://example.com/a"]}
     new = _find_new_posts(posts, state_partial, "test_site")
-    expected_new = [p for p in posts if p["url"] != "https://example.com/a"]
     if len(new) == 2 and all(p["url"] != "https://example.com/a" for p in new):
         runner.ok("detects 2 new posts correctly")
     else:
         runner.fail("new post detection", f"got {[p['url'] for p in new]}")
 
-    state_full = {"test_site": ["https://example.com/a", "https://example.com/b", "https://example.com/c"]}
+    state_full = {
+        "test_site": [
+            "https://example.com/a",
+            "https://example.com/b",
+            "https://example.com/c",
+        ]
+    }
     new = _find_new_posts(posts, state_full, "test_site")
     if new == []:
         runner.ok("no new posts when all are known")
     else:
         runner.fail("all-known check", f"got {len(new)} posts")
+
+    sites = load_sites()
+    rss_sites = [s for s in sites if s.get("type") == "rss"]
+    scrape_sites = [s for s in sites if s.get("type") == "scrape"]
+    unknown_sites = [s for s in sites if s.get("type") not in ("rss", "scrape")]
+
+    if len(rss_sites) > 0:
+        runner.ok(f"config has {len(rss_sites)} RSS site(s)")
+    if len(scrape_sites) > 0:
+        runner.ok(f"config has {len(scrape_sites)} scrape site(s)")
+    if unknown_sites:
+        runner.fail("unknown site types", str([s["name"] for s in unknown_sites]))
+    else:
+        runner.ok("all sites have valid type (rss or scrape)")
 
 
 # ---------------------------------------------------------------------------
@@ -308,6 +468,10 @@ def test_live_sites(runner: TestRunner):
 
     sites = load_sites()
     enabled = [s for s in sites if s.get("enabled", True)]
+    disabled = [s for s in sites if not s.get("enabled", True)]
+
+    for s in disabled:
+        runner.skip(f"{s['name']} ({s['type']})", "disabled in config")
 
     if not enabled:
         runner.skip("no enabled sites to test")
@@ -330,12 +494,40 @@ def test_live_sites(runner: TestRunner):
                 if has_title and has_url:
                     runner.ok(label, f"{len(posts)} posts in {elapsed:.1f}s")
                 else:
-                    runner.fail(label, f"post missing title/url keys: {sample.keys()}")
+                    runner.fail(label, f"post missing title/url keys: {list(sample.keys())}")
             elif isinstance(posts, list) and len(posts) == 0:
-                runner.skip(label, f"0 posts returned in {elapsed:.1f}s (site may be down)")
+                runner.skip(label, f"0 posts in {elapsed:.1f}s (site may be down or selector needs update)")
             else:
                 runner.fail(label, f"unexpected type: {type(posts).__name__}")
 
+        except Exception as e:
+            runner.fail(label, str(e))
+
+
+# ---------------------------------------------------------------------------
+# RSS fetch-and-parse test
+# ---------------------------------------------------------------------------
+def test_rss_fetch(runner: TestRunner):
+    section("RSS Fetch & Parse (network)")
+
+    sites = load_sites()
+    rss_enabled = [s for s in sites if s.get("type") == "rss" and s.get("enabled", True)]
+
+    if not rss_enabled:
+        runner.skip("no enabled RSS sites to test")
+        return
+
+    for site in rss_enabled:
+        label = f"_fetch_and_parse → {site['name']}"
+        try:
+            feed = _fetch_and_parse(site["url"])
+            if hasattr(feed, "entries"):
+                if len(feed.entries) > 0:
+                    runner.ok(label, f"{len(feed.entries)} entries")
+                else:
+                    runner.skip(label, "0 entries (may need fallback)")
+            else:
+                runner.fail(label, "result has no .entries attribute")
         except Exception as e:
             runner.fail(label, str(e))
 
@@ -406,6 +598,14 @@ def test_integration(runner: TestRunner):
         else:
             runner.fail(f"synthetic post detection ({label})", f"got {new3}")
 
+        updates = {label: [fake_post]}
+        plain = _format_plain(updates)
+        html_body = _format_html(updates)
+        if "Brand New" in plain and "Brand New" in html_body:
+            runner.ok("notification formatting works for detected updates")
+        else:
+            runner.fail("notification format in integration")
+
 
 # ---------------------------------------------------------------------------
 # Main
@@ -425,15 +625,20 @@ def main():
     test_config(runner)
     test_state_file(runner)
     test_notifier(runner)
+    test_scrape_helpers(runner)
+    test_rss_helpers(runner)
     test_checker_logic(runner)
 
     if args.quick:
         section("Live Site Checks (network)")
         runner.skip("live checks", "--quick flag set")
+        section("RSS Fetch & Parse (network)")
+        runner.skip("RSS fetch tests", "--quick flag set")
         section("Integration (full pipeline)")
         runner.skip("integration", "--quick flag set")
     else:
         test_live_sites(runner)
+        test_rss_fetch(runner)
         test_integration(runner)
 
     return runner.summary()

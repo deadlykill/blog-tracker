@@ -3,7 +3,7 @@
     "id": "sebastian_raschka_substack",
     "name": "Sebastian Raschka - Ahead of AI",
     "type": "rss",
-    "url": "https://sebastianraschka.substack.com/feed",
+    "url": "https://magazine.sebastianraschka.com/feed",
     "enabled": true
   },
   {
@@ -17,7 +17,7 @@
     "id": "jay_alammar_substack",
     "name": "Jay Alammar - Language Models & Co.",
     "type": "rss",
-    "url": "https://jayalammar.substack.com/feed",
+    "url": "https://newsletter.languagemodels.co/feed",
     "enabled": true
   },
   {
@@ -46,7 +46,7 @@
     "name": "Andrej Karpathy - Substack",
     "type": "rss",
     "url": "https://karpathy.substack.com/feed",
-    "enabled": true
+    "enabled": false
   },
   {
     "id": "karpathy_github",
