@@ -1,0 +1,175 @@
+[
+  {
+    "id": "sebastian_raschka_substack",
+    "name": "Sebastian Raschka - Ahead of AI",
+    "type": "rss",
+    "url": "https://sebastianraschka.substack.com/feed",
+    "enabled": true
+  },
+  {
+    "id": "maarten_grootendorst",
+    "name": "Maarten Grootendorst - Exploring Language Models",
+    "type": "rss",
+    "url": "https://newsletter.maartengrootendorst.com/feed",
+    "enabled": true
+  },
+  {
+    "id": "jay_alammar_substack",
+    "name": "Jay Alammar - Language Models & Co.",
+    "type": "rss",
+    "url": "https://jayalammar.substack.com/feed",
+    "enabled": true
+  },
+  {
+    "id": "ahmad_osman",
+    "name": "Ahmad Osman",
+    "type": "rss",
+    "url": "https://ahmadosman.substack.com/feed",
+    "enabled": false
+  },
+  {
+    "id": "ai2_medium",
+    "name": "Ai2 Blog (Medium)",
+    "type": "rss",
+    "url": "https://medium.com/feed/ai2-blog",
+    "enabled": true
+  },
+  {
+    "id": "towards_data_science",
+    "name": "Towards Data Science",
+    "type": "rss",
+    "url": "https://towardsdatascience.com/feed",
+    "enabled": true
+  },
+  {
+    "id": "karpathy_substack",
+    "name": "Andrej Karpathy - Substack",
+    "type": "rss",
+    "url": "https://karpathy.substack.com/feed",
+    "enabled": true
+  },
+  {
+    "id": "karpathy_github",
+    "name": "Andrej Karpathy - GitHub Activity",
+    "type": "rss",
+    "url": "https://github.com/karpathy.atom",
+    "enabled": true
+  },
+  {
+    "id": "chris_olah",
+    "name": "Chris Olah",
+    "type": "scrape",
+    "url": "https://colah.github.io",
+    "selector": "a[href^='posts/']",
+    "base_url": "https://colah.github.io",
+    "enabled": true
+  },
+  {
+    "id": "sebastian_raschka_blog",
+    "name": "Sebastian Raschka - Blog",
+    "type": "scrape",
+    "url": "https://sebastianraschka.com/blog",
+    "selector": "a[href*='/blog/']",
+    "base_url": "https://sebastianraschka.com",
+    "enabled": true
+  },
+  {
+    "id": "karpathy_blog",
+    "name": "Andrej Karpathy - Blog",
+    "type": "scrape",
+    "url": "https://karpathy.ai/blog",
+    "selector": "a[href]:not([href='index.html'])",
+    "base_url": "https://karpathy.ai",
+    "enabled": true
+  },
+  {
+    "id": "lilian_weng",
+    "name": "Lilian Weng - Lil'Log",
+    "type": "scrape",
+    "url": "https://lilianweng.github.io/posts/",
+    "selector": "a[href*='/posts/']",
+    "base_url": "https://lilianweng.github.io",
+    "enabled": true
+  },
+  {
+    "id": "jay_alammar_blog",
+    "name": "Jay Alammar - GitHub Blog",
+    "type": "scrape",
+    "url": "https://jalammar.github.io",
+    "selector": "article.post h1 a",
+    "base_url": "https://jalammar.github.io",
+    "enabled": true
+  },
+  {
+    "id": "ai2_blog",
+    "name": "Ai2 - Allen Institute for AI Blog",
+    "type": "scrape",
+    "url": "https://allenai.org/blog",
+    "selector": "a[href*='/blog/']",
+    "base_url": "https://allenai.org",
+    "enabled": true
+  },
+  {
+    "id": "labml_nn",
+    "name": "nn.labml.ai - Annotated Research Papers",
+    "type": "scrape",
+    "url": "https://nn.labml.ai",
+    "selector": "a[href*='/'][href$='.html']",
+    "base_url": "https://nn.labml.ai",
+    "enabled": true
+  },
+  {
+    "id": "lesswrong",
+    "name": "LessWrong",
+    "type": "scrape",
+    "url": "https://lesswrong.com",
+    "selector": "a[href*='/posts/']",
+    "base_url": "https://lesswrong.com",
+    "enabled": true
+  },
+  {
+    "id": "transformer_circuits",
+    "name": "Transformer Circuits",
+    "type": "scrape",
+    "url": "https://transformer-circuits.pub",
+    "selector": "a[href^='20']",
+    "base_url": "https://transformer-circuits.pub",
+    "enabled": true
+  },
+  {
+    "id": "nvidia_news",
+    "name": "NVIDIA Newsroom",
+    "type": "scrape",
+    "url": "https://nvidianews.nvidia.com",
+    "selector": "a[href^='/news/']",
+    "base_url": "https://nvidianews.nvidia.com",
+    "enabled": true
+  },
+  {
+    "id": "lunartech",
+    "name": "LunarTech Blog",
+    "type": "scrape",
+    "url": "https://lunartech.ai/blog/",
+    "selector": "a[href*='/blog/']",
+    "base_url": "https://lunartech.ai",
+    "enabled": true
+  },
+  {
+    "id": "anthropic_research",
+    "name": "Anthropic Research",
+    "type": "scrape",
+    "url": "https://www.anthropic.com/research",
+    "selector": "a[href*='/research/']",
+    "base_url": "https://www.anthropic.com",
+    "enabled": true
+  },
+  {
+    "id": "anthropic_news",
+    "name": "Anthropic News",
+    "type": "scrape",
+    "url": "https://www.anthropic.com/news",
+    "selector": "a[href*='/news/']",
+    "base_url": "https://www.anthropic.com",
+    "enabled": true
+  }
+]
