@@ -112,6 +112,7 @@
     "https://github.com/karpathy/nanochat/compare/7b70f6b411...a4ed96687b",
     "https://github.com/karpathy/nanochat/compare/a445144d39...b9b6ce137b",
     "https://github.com/karpathy/nanochat/compare/a4ed96687b...7808dc7159",
+    "https://github.com/karpathy/nanochat/compare/b9b6ce137b...0aaca56805",
     "https://github.com/karpathy/nanochat/compare/c0dbf1f3ff...47e983eea7",
     "https://github.com/karpathy/nanochat/issues/592",
     "https://github.com/karpathy/nanochat/issues/637",
@@ -273,9 +274,11 @@
     "https://lesswrong.com/posts/qhdP2mLngx4rXnnbD/kave-s-shortform?commentId=fWPfKzqRtcbxw8EkD",
     "https://lesswrong.com/posts/rKmojEZ9qKwApjCfX/the-gears-to-ascenscion-s-shortform?commentId=uLpAAtcvDYAdE3qXg",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=7aiHz72X8gSq2CJQo",
+    "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=zsRMZ4HvnSBb4SvQs",
     "https://lesswrong.com/posts/tDkYdyJSqe3DddtK4/alexander-gietelink-oldenziel-s-shortform?commentId=YyWhAbc8h7v8ixLss",
     "https://lesswrong.com/posts/tDkYdyJSqe3DddtK4/alexander-gietelink-oldenziel-s-shortform?commentId=tZbmRQXkSRzTtkpwn",
     "https://lesswrong.com/posts/tDkYdyJSqe3DddtK4/alexander-gietelink-oldenziel-s-shortform?commentId=tiBvDTZs2MfjmLBxz",
+    "https://lesswrong.com/posts/tNSkeaRFi2oGnWwWZ/nielsrolf-s-shortform?commentId=g7XPF9JrmwWd7yj3B",
     "https://lesswrong.com/posts/vefsxkGWkEMmDcZ7v/the-effects-of-caffeine-consumption-do-not-decay-with-a-5",
     "https://lesswrong.com/posts/wFg8Y8yzPprSt9Rnd/zroe1-s-shortform?commentId=yjZLrtr3ibFpP8gDN",
     "https://lesswrong.com/posts/xG9Y2Mct7uZyt98yb/annoyingly-principled-people-and-what-befalls-them",
@@ -285,7 +288,8 @@
   ],
   "nvidia_news": [
     "https://nvidianews.nvidia.com/news/nvidia-ai-ecosystem-expands-as-marvell-joins-forces-through-nvlink-fusion",
-    "https://nvidianews.nvidia.com/news/nvidia-and-emerald-ai-join-leading-energy-companies-to-pioneer-flexible-ai-factories-as-grid-assets"
+    "https://nvidianews.nvidia.com/news/nvidia-and-emerald-ai-join-leading-energy-companies-to-pioneer-flexible-ai-factories-as-grid-assets",
+    "https://nvidianews.nvidia.com/news/nvidia-launches-ising-the-worlds-first-open-ai-models-to-accelerate-the-path-to-useful-quantum-computers"
   ],
   "lunartech": [
     "https://lunartech.ai/blog/a-beginners-guide-to-leveraging-lunartechs-open-source-contributions-and-resources",
@@ -401,6 +405,7 @@
     "https://www.anthropic.com/news/claude-sonnet-4-6",
     "https://www.anthropic.com/news/google-broadcom-partnership-compute",
     "https://www.anthropic.com/news/mozilla-firefox-security",
+    "https://www.anthropic.com/news/narasimhan-board",
     "https://www.anthropic.com/news/statement-comments-secretary-war",
     "https://www.anthropic.com/news/statement-department-of-war",
     "https://www.anthropic.com/news/sydney-fourth-office-asia-pacific",
@@ -552,6 +557,7 @@
     "https://transformer-circuits.pub/2026/emotions/index.html"
   ],
   "anthropic_research": [
+    "https://www.anthropic.com/research/automated-alignment-researchers",
     "https://www.anthropic.com/research/constitutional-classifiers",
     "https://www.anthropic.com/research/diff-tool",
     "https://www.anthropic.com/research/economic-index-march-2026-report",
