@@ -386,10 +386,13 @@
     "https://lesswrong.com/posts/rKmojEZ9qKwApjCfX/the-gears-to-ascenscion-s-shortform?commentId=uLpAAtcvDYAdE3qXg",
     "https://lesswrong.com/posts/rP9nPwg7gRe5mTSDz/kaj-s-shortform-feed?commentId=FzXFfFLTHEeujx7xo",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=7aiHz72X8gSq2CJQo",
+    "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=XTBEBNcAQpCQbc8kx",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=cyTGyE4FhP564vt7x",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=irFXMsLg8dH9kjNgj",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=jg53kHGhQfaecjhne",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=m7EFfcE3w2RgFzb2M",
+    "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=qGKdocPXuqpiezcvn",
+    "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=z7Zqz9wJqjsXA7Qsw",
     "https://lesswrong.com/posts/s58hDHX2GkFDbpGKD/linch-s-shortform?commentId=zsRMZ4HvnSBb4SvQs",
     "https://lesswrong.com/posts/smCHhegyxEAh3Gygg/ai-companies-should-publish-security-assessments",
     "https://lesswrong.com/posts/tDkYdyJSqe3DddtK4/alexander-gietelink-oldenziel-s-shortform?commentId=YyWhAbc8h7v8ixLss",
@@ -415,7 +418,8 @@
   "nvidia_news": [
     "https://nvidianews.nvidia.com/news/nvidia-ai-ecosystem-expands-as-marvell-joins-forces-through-nvlink-fusion",
     "https://nvidianews.nvidia.com/news/nvidia-and-emerald-ai-join-leading-energy-companies-to-pioneer-flexible-ai-factories-as-grid-assets",
-    "https://nvidianews.nvidia.com/news/nvidia-launches-ising-the-worlds-first-open-ai-models-to-accelerate-the-path-to-useful-quantum-computers"
+    "https://nvidianews.nvidia.com/news/nvidia-launches-ising-the-worlds-first-open-ai-models-to-accelerate-the-path-to-useful-quantum-computers",
+    "https://nvidianews.nvidia.com/news/nvidia-sets-conference-call-for-first-quarter-financial-results-6919947"
   ],
   "lunartech": [
     "https://lunartech.ai/blog/a-beginners-guide-to-leveraging-lunartechs-open-source-contributions-and-resources",
@@ -694,6 +698,7 @@
   ],
   "anthropic_research": [
     "https://www.anthropic.com/research/81k-economics",
+    "https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench",
     "https://www.anthropic.com/research/automated-alignment-researchers",
     "https://www.anthropic.com/research/constitutional-classifiers",
     "https://www.anthropic.com/research/diff-tool",
