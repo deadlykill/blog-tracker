@@ -402,6 +402,7 @@
     "https://lesswrong.com/posts/hhbibJGt2aQqKJLb7/shortform-1?commentId=FmT3o5XCReRfSiQFi",
     "https://lesswrong.com/posts/hhbibJGt2aQqKJLb7/shortform-1?commentId=cGnEydPNLzPZcdCeT",
     "https://lesswrong.com/posts/hhbibJGt2aQqKJLb7/shortform-1?commentId=p8a43jfRrnRCcNsue",
+    "https://lesswrong.com/posts/hqdvZGhxC45g57a6s/oliver-sourbut-s-shortform?commentId=jLg3Nw5b42SQ8mnyQ",
     "https://lesswrong.com/posts/hrZAvpLnBTgRhNmgk/you-have-not-been-a-good-user-lesswrong-s-second-album",
     "https://lesswrong.com/posts/i7JSL5awGFcSRhyGF/shortform-2?commentId=HHvEqpkb3idgAWjLw",
     "https://lesswrong.com/posts/i7JSL5awGFcSRhyGF/shortform-2?commentId=xzo6kRotk3SYEkbQv",
@@ -533,11 +534,16 @@
     "https://lunartech.ai/blog/lens-x-lunartech",
     "https://lunartech.ai/blog/lunartech-announces-a-major-milestone-for-octavia-with-the-translation-of-an-11-hour-linear-algebra-course-into-more-than-11-languages",
     "https://lunartech.ai/blog/lunartech-announces-a-major-upgrade-to-octavia-with-more-intelligent-context-aware-translation-capabilities",
+    "https://lunartech.ai/blog/lunartech-announces-accelerated-global-growth-scaling-ai-infrastructure-education-and-applied-intelligence-systems",
     "https://lunartech.ai/blog/lunartech-announces-babel-an-ai-powered-document-translation-platform-designed-to-deliver-format-accurate-enterprise-grade-localization",
+    "https://lunartech.ai/blog/lunartech-announces-major-expansion-of-its-ai-powered-training-infrastructure-for-fellows-students-and-enterprise-talent-development",
+    "https://lunartech.ai/blog/lunartech-announces-major-expansion-of-its-multilingual-ai-infrastructure-to-support-global-learning-diaspora-communities-and-cross-language-knowledge-access",
     "https://lunartech.ai/blog/lunartech-announces-octavia-an-advanced-ai-dubbing-and-localization-platform-designed-to-expand-global-access-to-knowledge",
+    "https://lunartech.ai/blog/lunartech-announces-two-major-octavia-updates-giving-users-greater-control-over-transcription-and-translation-while-advancing-speed-accuracy-and-adaptability",
     "https://lunartech.ai/blog/lunartech-annual-report-2024-a-year-of-innovation-expansion-and-global-impact",
     "https://lunartech.ai/blog/lunartech-fellowship-next-generation-of-20x-ai-engineers-are-built-here",
     "https://lunartech.ai/blog/lunartech-fellowship-the-bridge-between-academia-and-the-tech-industry",
+    "https://lunartech.ai/blog/lunartech-introduces-major-babel-model-upgrade-expanding-its-academic-and-multilingual-content-infrastructure-toward-practically-unlimited-scale",
     "https://lunartech.ai/blog/lunartech-named-top-open-source-contributor-of-2024-by-freecodecamp",
     "https://lunartech.ai/blog/lunartech-superpowers-complete-claude-ai-skills-library",
     "https://lunartech.ai/blog/lunartech-unleashing-the-power-of-ai-with-lunartech",
@@ -769,7 +775,8 @@
     "https://transformer-circuits.pub/2025/october-update/index.html",
     "https://transformer-circuits.pub/2025/september-update/index.html",
     "https://transformer-circuits.pub/2026/emotions/index.html",
-    "https://transformer-circuits.pub/2026/headvis/index.html"
+    "https://transformer-circuits.pub/2026/headvis/index.html",
+    "https://transformer-circuits.pub/2026/nla/index.html"
   ],
   "anthropic_research": [
     "https://www.anthropic.com/research/81k-economics",
@@ -786,6 +793,7 @@
     "https://www.anthropic.com/research/introducing-anthropic-science",
     "https://www.anthropic.com/research/labor-market-impacts",
     "https://www.anthropic.com/research/long-running-Claude",
+    "https://www.anthropic.com/research/natural-language-autoencoders",
     "https://www.anthropic.com/research/project-vend-2",
     "https://www.anthropic.com/research/trustworthy-agents",
     "https://www.anthropic.com/research/vibe-physics"
