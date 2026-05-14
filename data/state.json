@@ -679,6 +679,7 @@
     "https://www.anthropic.com/news/election-safeguards-update",
     "https://www.anthropic.com/news/enterprise-ai-services-company",
     "https://www.anthropic.com/news/finance-agents",
+    "https://www.anthropic.com/news/gates-foundation-partnership",
     "https://www.anthropic.com/news/google-broadcom-partnership-compute",
     "https://www.anthropic.com/news/higher-limits-spacex",
     "https://www.anthropic.com/news/mozilla-firefox-security",
@@ -837,6 +838,7 @@
     "https://transformer-circuits.pub/2026/nla/index.html"
   ],
   "anthropic_research": [
+    "https://www.anthropic.com/research/2028-ai-leadership",
     "https://www.anthropic.com/research/81k-economics",
     "https://www.anthropic.com/research/Evaluating-Claude-For-Bioinformatics-With-BioMysteryBench",
     "https://www.anthropic.com/research/anthropic-institute-agenda",
