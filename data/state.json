@@ -76,6 +76,7 @@
     "https://towardsdatascience.com/7-crucial-barriers-between-data-teams-and-self-healing-data-architecture/",
     "https://towardsdatascience.com/a-harness-for-every-task-putting-a-team-of-claudes-on-one-job/",
     "https://towardsdatascience.com/a-survival-analysis-guide-with-python-using-time-to-event-models-to-forecast-customer-lifetime/",
+    "https://towardsdatascience.com/a-three-phase-factual-recall-circuit-in-gemma-2b-and-gemma-12b-it/",
     "https://towardsdatascience.com/a-visual-explanation-of-the-linear-regression/",
     "https://towardsdatascience.com/anchor-detection-for-rag-parallel-detectors-then-one-llm-call-at-the-end/",
     "https://towardsdatascience.com/automate-writing-your-llm-prompts/",
@@ -128,6 +129,7 @@
     "https://towardsdatascience.com/how-does-ai-learn-to-see-in-3d-and-understand-space/",
     "https://towardsdatascience.com/how-i-continually-improve-my-claude-code/",
     "https://towardsdatascience.com/how-powerful-is-claude-fable-mythos-5-for-coding/",
+    "https://towardsdatascience.com/how-to-build-a-credit-scoring-grid-from-a-logistic-regression-model/",
     "https://towardsdatascience.com/how-to-combining-claude-code-and-codex-for-max-coding-power/",
     "https://towardsdatascience.com/how-to-create-powerful-loops-in-claude-code/",
     "https://towardsdatascience.com/how-to-effectively-align-with-claude-code/",
@@ -250,7 +252,8 @@
     "https://towardsdatascience.com/why-this-decade-old-idea-still-powers-all-of-ai-and-why-its-a-problem/",
     "https://towardsdatascience.com/why-your-ai-demo-will-die-in-production/",
     "https://towardsdatascience.com/you-probably-dont-need-an-agent-framework/",
-    "https://towardsdatascience.com/your-churn-threshold-is-a-pricing-decision/"
+    "https://towardsdatascience.com/your-churn-threshold-is-a-pricing-decision/",
+    "https://towardsdatascience.com/your-first-task-as-a-data-engineer-in-a-new-company-make-the-etl-pipeline-testable/"
   ],
   "karpathy_substack": [
     "https://karpathy.substack.com/p/coming-soon"
@@ -740,6 +743,7 @@
     "https://lesswrong.com/posts/Zh9oLXhNoacd4SjAs/john-clark-levin-s-shortform?commentId=J6L5taTknJzpmCDiy",
     "https://lesswrong.com/posts/ZtQD8CmQRZKNQFRd3/faul_sname-s-shortform?commentId=Kfkecf44YrTiNciDv",
     "https://lesswrong.com/posts/ZtQD8CmQRZKNQFRd3/faul_sname-s-shortform?commentId=jGv5aczE8Gz3xZWwm",
+    "https://lesswrong.com/posts/ZtQD8CmQRZKNQFRd3/faul_sname-s-shortform?commentId=pcAfqGGaf3TXJbbEs",
     "https://lesswrong.com/posts/ZvQfcLbcNHYqmvWyo/the-paper-that-killed-deep-learning-theory",
     "https://lesswrong.com/posts/a9zfyHymPYY58D8hx/socrates-is-mortal",
     "https://lesswrong.com/posts/aBhMGziEwA7FXNxhq/try-even-if-they-have-you-cold",
@@ -1005,6 +1009,7 @@
     "https://lesswrong.com/posts/wn5jTrtKkhspshA4c/michaeldickens-s-shortform?commentId=BrdYMvLB8BCvfR7Cm",
     "https://lesswrong.com/posts/wn5jTrtKkhspshA4c/michaeldickens-s-shortform?commentId=T4vTqgNGi4neHLGg8",
     "https://lesswrong.com/posts/wn5jTrtKkhspshA4c/michaeldickens-s-shortform?commentId=WgYag3XfDj6E9RKmr",
+    "https://lesswrong.com/posts/wt4CnnfoZyKCo5m49/ashl-s-shortform?commentId=ESrLf9Mk3KeHK7twZ",
     "https://lesswrong.com/posts/xG9Y2Mct7uZyt98yb/annoyingly-principled-people-and-what-befalls-them",
     "https://lesswrong.com/posts/xdkZSeSQN4bA8hmrb/the-problem-in-the-nerd-sniping-xkcd-comic",
     "https://lesswrong.com/posts/xhePNvxamTKPcobhB/the-financial-ledger-theory-of-apologies",
